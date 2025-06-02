@@ -1,0 +1,29 @@
+html{
+  background-color: white;
+}
+
+.header-component {
+  background-color: dodgerblue;
+}
+
+.header-cont {
+  color: white;
+}
+
+.nav-item a {
+  color: white;
+  border-color: white;
+}
+
+.submit-button {
+  border-color: cornflowerblue;
+  background-color: cornflowerblue;
+  color: white;
+  /* -webkit-text-stroke: 0.02em blue; */
+}
+
+.errors-422{
+  border-color: red;
+  background-color: rgb(255, 76, 76);
+  color: white
+}
