@@ -6,6 +6,8 @@ import ProfileView from '@/views/ProfileView.vue'
 import TestView from '@/views/TestView.vue'
 import WordsView from '@/views/WordsView.vue'
 import { decodeUserIdFromToken } from '@/scripts/auth'
+import CategoryWordsView from '@/views/CategoryWordsView.vue'
+import MoviesView from '@/views/MoviesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +53,18 @@ const router = createRouter({
       name: 'words',
       component: WordsView,
       meta: { requiresAuth: true },
+    },
+    {
+      path: '/words/category/:category_id',
+      name: 'category',
+      component: CategoryWordsView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/movies',
+      name: 'movies',
+      component: MoviesView,
+      meta: { requiresAuth: false },
     },
   ],
 })

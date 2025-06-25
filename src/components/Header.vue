@@ -9,7 +9,7 @@
                 <div class="nav-item"><RouterLink :to="{name:'home'}">Home</RouterLink></div>
                 <div class="nav-item"><RouterLink :to="{name:'about'}">About</RouterLink></div>
                 <div class="nav-item"><RouterLink :to="{name:'words'}">Words</RouterLink></div>
-                <div class="nav-item">Movies</div>
+                <div class="nav-item"><RouterLink :to="{name:'movies'}">Movies</RouterLink></div>
                 <div class="nav-item" v-if="!user_id"><RouterLink :to="{name:'login'}">Login</RouterLink></div>
                 <div class="nav-item" v-if="!user_id"><RouterLink :to="{name:'register'}">Register</RouterLink></div>
                 <div class="nav-item" v-if="user_id"><RouterLink :to="{name:'profile'}">Profile</RouterLink></div>
