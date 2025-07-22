@@ -2,6 +2,10 @@ html{
   background-color: white;
 }
 
+a{
+  color: inherit;
+}
+
 .header-component {
   background-color: dodgerblue;
 }
@@ -26,4 +30,8 @@ html{
   border-color: red;
   background-color: rgb(255, 76, 76);
   color: white
+}
+.example_highlight{
+  color: dodgerblue;
+  font-weight: bold;
 }

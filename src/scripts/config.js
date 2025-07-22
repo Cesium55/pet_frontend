@@ -3,6 +3,7 @@ const words_prefix = import.meta.env.VITE_WORDS_URL
 const media_handler_prefix = import.meta.env.VITE_MEDIA_HANDLER_URL + "/api/v1"
 const s3_prefix = import.meta.env.VITE_S3_PREFIX
 const s3_bucket = import.meta.env.VITE_S3_BUCKET
+const interval_repeat_prefix = import.meta.env.VITE_IR_URL
 
 
 
@@ -14,7 +15,11 @@ export default {
     logout_url: auth_prefix + "/logout",
     words_categories_all_url: words_prefix + "/categories",
     words_by_category_url: (category_id) => words_prefix + "/categories/" + category_id + "/words",
+    words_by_ids_url: words_prefix + "/words/by-ids",
     s3_prefix: s3_prefix,
     s3_bucket: s3_bucket,
-    media_handler_prefix: media_handler_prefix
+    media_handler_prefix: media_handler_prefix,
+    interval_repeat_prefix: interval_repeat_prefix,
+    interval_repeat_url: interval_repeat_prefix + "/ir",
+    ir_instances_to_learn_prefix: interval_repeat_prefix + "/ir/instances-to-learn"
 }

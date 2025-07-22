@@ -1,26 +1,26 @@
 <template>
-    <div class="words-page">
-        <CategoryList :categories="categories"></CategoryList>
-    </div>
+
+    <WordsContainer>
+        <h2>
+            Welcome to GEMBO Words section!
+        </h2>
+        <div>
+            Here you can pick some categories and learn words.
+        </div>
+        <div>We recommend to start with oxford categories (A1, A2, B1, B2, C1) accroding to your English level.</div>
+        <div>Use the menu on the left to navigate on the website</div>
+    </WordsContainer>
+
+
+
+
 </template>
 
 
 <script setup>
-import CategoryList from '@/components/CategoryList.vue';
-import { authFetch } from '@/scripts/auth';
-import config from '@/scripts/config';
-import { onMounted, ref } from 'vue';
-
-const categories = ref([])
-
-onMounted(async ()=>{
-    const response = await authFetch(config.words_categories_all_url)
-    if (response.ok){
-        const response_json = await response.json()
-        categories.value = response_json.data
-    }
-})
+import WordsContainer from '@/components/Containers/WordsContainer.vue';
 </script>
+
 
 
 <style scoped></style>

@@ -35,6 +35,7 @@ async function authFetch(input, init = {}) {
     const headers = new Headers(init.headers || {})
     if (token) {
         headers.set('Authorization', `Bearer ${token}`)
+        headers.set('Content-Type', `application/json`)
     }
 
     let response = await fetch(input, {

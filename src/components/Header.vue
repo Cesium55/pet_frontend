@@ -42,5 +42,8 @@ const logout_handler = async (e) => {
 </script>
 
 <style scoped>
-    
+.header-component{
+    position: fixed;
+    width: 100%;
+}
 </style>

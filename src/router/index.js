@@ -8,6 +8,8 @@ import WordsView from '@/views/WordsView.vue'
 import { decodeUserIdFromToken } from '@/scripts/auth'
 import CategoryWordsView from '@/views/CategoryWordsView.vue'
 import MoviesView from '@/views/MoviesView.vue'
+import WordsCategoriesView from '@/views/WordsCategoriesView.vue'
+import WordsLearn from '@/views/WordsLearn.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +54,18 @@ const router = createRouter({
       path: '/words',
       name: 'words',
       component: WordsView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/words/categories',
+      name: 'categories',
+      component: WordsCategoriesView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/words/learn',
+      name: 'learn_words',
+      component: WordsLearn,
       meta: { requiresAuth: true },
     },
     {

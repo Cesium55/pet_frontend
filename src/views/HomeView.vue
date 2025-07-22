@@ -1,6 +1,6 @@
 <template>
     <div class="home-page">
-        GEMBOSS
+        <h2>Michael Gemboss</h2>
     </div>
 </template>
 
