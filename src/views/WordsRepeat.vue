@@ -3,13 +3,16 @@
         <div class="words-learn">
 
             <div class="panel-cont" v-if="words">
+                 + {{ words.length }}
                 <div class="panel">
-                    <WordsPanel :langs="['eng', 'rus']" :word="word" @known_clicked="handle_mark_as_known"
-                        @learn_clicked="handle_start_learning">
-                        Nothing to learn, pick some categories to start
+                    <WordsPanel :new_word="false" :langs="['eng', 'rus']" :word="word"
+                        @forgot_clicked="async () => await handle_repeat(false)"
+                        @remember_clicked="async () => await handle_repeat(true)">
+                        {{ no_word_description }}
                     </WordsPanel>
                 </div>
             </div>
+
         </div>
     </WordsContainer>
 </template>
@@ -20,41 +23,36 @@ import WordsContainer from '@/components/Containers/WordsContainer.vue';
 import config from '@/scripts/config';
 import { authFetch } from '@/scripts/auth';
 import { onMounted, ref } from 'vue';
-import { get_instances_to_learn, mark_as_known, start_learning } from '@/scripts/ir_scripts';
+import { get_instances_to_repeat, repeat, get_next_repeat_description } from '@/scripts/ir_scripts';
 import { get_words_by_ids } from '@/scripts/words';
 import WordsPanel from '@/components/words/WordsPanel.vue';
 
 const word = ref(false)
+const no_word_description = ref("NTR")
 let words = []
 
-async function handle_mark_as_known() {
-    const result = await mark_as_known('words', word.value.id)
-    await next_word()
-}
 
-async function handle_start_learning() {
-    const result = await start_learning('words', word.value.id) 
+async function handle_repeat(remembered_status) {
+    const result = await repeat('words', word.value.id, remembered_status)
     await next_word()
 }
 
 async function get_new_words() {
-    const ir_data = (await get_instances_to_learn("words")).data
+    const ir_data = (await get_instances_to_repeat("words")).data
     if (ir_data.length) {
         const ir_ids = ir_data.map(x => x.instance_id)
 
         const words_data = (await get_words_by_ids(ir_ids)).data
         ir_data.forEach(element => {
             if (words.length && words[0].id == element.instance_id) { }
-            else {
-                words.push({
+            words.push({
                     ...words_data.find(x => x.id == element.instance_id),
                     ...element
                 })
-            }
         });
     }
     else {
-        console.log("zero words")
+        no_word_description.value = await get_next_repeat_description("words")
     }
 }
 
@@ -68,9 +66,7 @@ async function next_word() {
 
 onMounted(async () => {
     await get_new_words()
-    if (words.length){
-        await next_word()
-    }
+    await next_word()
 
 })
 </script>

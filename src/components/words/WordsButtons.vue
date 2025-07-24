@@ -15,8 +15,8 @@
         <WordButton @click="$emit('show_clicked')" :button_count_class_name="button_count_class_name" v-if="show">{{
             LocalizationManager.get_string("word_translate") }}<br> [↑]</WordButton>
 
-        <WordButton @click="$emit('repeat_clicked')" :button_count_class_name="button_count_class_name + ' rb'"
-            v-if="repeat">{{ LocalizationManager.get_string("word_no_remember") }}<br>[→]
+        <WordButton @click="$emit('forgot_clicked')" :button_count_class_name="button_count_class_name + ' rb'"
+            v-if="forgot">{{ LocalizationManager.get_string("word_no_remember") }}<br>[→]
         </WordButton>
 
         <WordButton @click="$emit('learn_clicked')" :button_count_class_name="button_count_class_name + ' rb'"
@@ -40,7 +40,7 @@ const props = defineProps({
     learn: Boolean,
     known: Boolean,
     remember: Boolean,
-    repeat: Boolean,
+    forgot: Boolean,
     example: Boolean,
     show: Boolean
 })
@@ -49,7 +49,7 @@ const emits = defineEmits([
     "learn_clicked",
     "known_clicked",
     "remember_clicked",
-    "repeat_clicked",
+    "forgot_clicked",
     "example_clicked",
     "show_clicked"
 ])
@@ -81,7 +81,6 @@ const button_count_class_name = { 1: "uno", 2: "dos", 3: "tres", 4: "quatro" }[b
 
 .word_buttons {
 
-    padding-bottom: 0.6em;
 
     display: flex;
 

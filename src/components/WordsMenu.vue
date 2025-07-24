@@ -6,9 +6,9 @@
         <div class="menu">
             <div class="words_menu_item"><router-link :to="{name: 'categories'}">Categories</router-link></div>
             <div class="words_menu_item"><router-link :to="{name: 'learn_words'}">Learn words</router-link></div>
-            <div class="words_menu_item">Repeat words</div>
+            <div class="words_menu_item"><router-link :to="{name: 'repeat_words'}">Repeat words</router-link></div>
             <div class="words_menu_item">Mixed mode</div>
-            <div class="words_menu_item">Statistics</div>
+            <div class="words_menu_item"><router-link :to="{name: 'words_stats'}">Statistics</router-link></div>
         </div>
     </div>
 </template>

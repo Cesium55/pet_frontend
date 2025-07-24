@@ -21,5 +21,11 @@ export default {
     media_handler_prefix: media_handler_prefix,
     interval_repeat_prefix: interval_repeat_prefix,
     interval_repeat_url: interval_repeat_prefix + "/ir",
-    ir_instances_to_learn_prefix: interval_repeat_prefix + "/ir/instances-to-learn"
+    ir_instances_to_learn_prefix: interval_repeat_prefix + "/ir/instances-to-learn",
+    ir_mark_as_known_url: interval_repeat_prefix + "/ir/already-know",
+    ir_start_learning_url: interval_repeat_prefix + "/ir/learn",
+    ir_repeat_url: interval_repeat_prefix + "/ir/repeat",
+    ir_instances_to_repeat_url: interval_repeat_prefix + "/ir/instances-to-repeat",
+    ir_get_next_repeat_relation_url: interval_repeat_prefix + "/ir/get-next-repeat-relation",
+
 }

@@ -10,6 +10,8 @@ import CategoryWordsView from '@/views/CategoryWordsView.vue'
 import MoviesView from '@/views/MoviesView.vue'
 import WordsCategoriesView from '@/views/WordsCategoriesView.vue'
 import WordsLearn from '@/views/WordsLearn.vue'
+import WordsRepeat from '@/views/WordsRepeat.vue'
+import WordsStats from '@/views/WordsStats.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -66,6 +68,18 @@ const router = createRouter({
       path: '/words/learn',
       name: 'learn_words',
       component: WordsLearn,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/words/repeat',
+      name: 'repeat_words',
+      component: WordsRepeat,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/words/stats',
+      name: 'words_stats',
+      component: WordsStats,
       meta: { requiresAuth: true },
     },
     {

@@ -36,7 +36,9 @@ const emits = defineEmits(["click", "up", "down", "left", "right"])
 
 
 .word_button {
-    padding: 0.6em;
+    height: 100%;
+    padding: 1em;
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,12 +69,12 @@ const emits = defineEmits(["click", "up", "down", "left", "right"])
 }
 
 .lb {
-    border-bottom-left-radius: inherit;
+    border-bottom-left-radius: 1em;
     border-left: none;
 }
 
 .rb {
-    border-bottom-right-radius: inherit;
+    border-bottom-right-radius: 1em;
     border-right: none;
 }
 </style>
