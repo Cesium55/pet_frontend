@@ -2,11 +2,9 @@
     <div class="movies-page">
         <h1>Movies</h1>
         <h2 v-if="!(total_movies===false)">Total: {{ total_movies }}</h2>
-        <div class="movies-list">
-            <div class="movie" v-for="movie in movies">
-                {{ movie.title }}
-            </div>
-        </div>
+        <MoviesList :movies="movies">
+
+        </MoviesList>
     </div>
 </template>
 
@@ -15,8 +13,9 @@
 import { authFetch } from '@/scripts/auth';
 import config from '@/scripts/config';
 import { onMounted, ref } from 'vue';
+import MoviesList from '@/components/movies/MoviesList.vue';
 
-const movies = ref(false)
+const movies = ref([])
 const total_movies = ref(false)
 
 onMounted(async () => {

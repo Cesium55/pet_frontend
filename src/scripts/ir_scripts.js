@@ -2,7 +2,7 @@ import { authFetch } from "./auth";
 import config from "./config";
 
 async function get_categories_sub_info() {
-    const response = await authFetch(config.interval_repeat_url + "/groups/")
+    const response = await authFetch(config.interval_repeat_url + "/groups")
 
     if (response.ok) {
         const response_json = await response.json()
