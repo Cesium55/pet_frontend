@@ -51,6 +51,7 @@ async function start_learning(entity_type, instance_id) {
 
 
 async function repeat(entity_type, instance_id, remembered_status) {
+    console.log("clip repeat " + JSON.stringify({ instance_id: instance_id, entity_type: entity_type, remembered_status: remembered_status }))
     const ir_response = await authFetch(config.ir_repeat_url, { method: "put", body: JSON.stringify({ instance_id: instance_id, entity_type: entity_type, remembered_status: remembered_status }) })
     if (ir_response.ok) {
         const ir_data = await ir_response.json()

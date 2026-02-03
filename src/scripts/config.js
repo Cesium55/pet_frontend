@@ -32,9 +32,11 @@ export default {
     ir_repeat_url: interval_repeat_prefix + "/ir/repeat",
     ir_instances_to_repeat_url: interval_repeat_prefix + "/ir/instances-to-repeat",
     ir_get_next_repeat_relation_url: interval_repeat_prefix + "/ir/get-next-repeat-relation",
+    ir_get_by_ids_url: (entity_type, ids) => interval_repeat_prefix + "/ir/instances/by-ids?entity_type=" + entity_type + "&instances_list=" + ids.join(','),
 
     movie_get_url: (movie_id) => media_handler_prefix + "/videos/" + movie_id,
     clips_get_url: (movie_id) => media_handler_prefix + "/videos/" + movie_id + "/clips",
+    clips_by_ids_url: (ids) => media_handler_prefix + "/clips?ids=" + ids.join(','),
     get_clip_by_timing_url: (movie_id, timing) => media_handler_prefix + "/videos/" + movie_id + "/clip-by-timing?timing=" + timing
 
 }

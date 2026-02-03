@@ -1,6 +1,7 @@
 <template>
     <div class="movies-page">
         <h1>Movies</h1>
+        <h2><RouterLink :to="{name: 'clips'}">Repeat page</RouterLink></h2>
         <h2 v-if="!(total_movies===false)">Total: {{ total_movies }}</h2>
         <MoviesList :movies="movies">
 

@@ -4,8 +4,8 @@
         <GemboPlayer :src="config.s3_url + movie.video_path" :thumb-href="config.s3_url + movie.thumb_path"
             :subs="subs_ref" @wanna_add_clip="wanna_add_clip_handler" :buttons="{
                 add: true,
-                remember: true,
-                forget: true
+                // remember: true,
+                // forget: true
             }"></GemboPlayer>
 
         <br><br><br><br><br><br>
@@ -14,7 +14,6 @@
 
 
 <script setup>
-import { authFetch } from '@/scripts/auth';
 import config from '@/scripts/config';
 import { get_clip_by_timing, get_movie_data, load_subs } from '@/scripts/movies';
 import { onMounted, ref } from 'vue';

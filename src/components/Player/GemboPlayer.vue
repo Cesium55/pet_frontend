@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, provide, computed } from 'vue'
+import { ref, onMounted, onBeforeUnmount, provide, computed, watch } from 'vue'
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css';
 import { VolumeManager } from '@/scripts/player/volume';
@@ -40,7 +40,7 @@ const props = defineProps({
 })
 
 
-const emit = defineEmits(["wanna_add_clip", "i_remembered_clip", "i_forgot_clip"])
+const emit = defineEmits(["wanna_add_clip", "i_remembered_clip", "i_forgot_clip", "debug_emit"])
 
 const containerRef = ref(null)
 
@@ -51,9 +51,7 @@ const videoPlayer = ref(null)
 let player = null
 
 
-const srt_parser = computed(() => {
-    return props.subs ? new SrtParser(props.subs.eng, props.subs.rus) : false
-})
+const srt_parser = ref(false)
 
 
 async function learn_emit(emit_name) {
@@ -61,11 +59,33 @@ async function learn_emit(emit_name) {
 }
 
 
+watch(
+    () => props.src,
+    (newSrc) => {
+        if (player && newSrc) {
+            player.src({ src: newSrc, type: "video/mp4" });
+            player.play();
+        }
+    }
+);
+
+
+watch(
+    () => props.subs,
+    (new_subs) => {
+        console.log("subs watch update")
+        if (player && new_subs) {
+            srt_parser.value = new SrtParser(new_subs.eng, new_subs.rus)
+        }
+    }
+);
+
+
 onMounted(() => {
 
-    srt_parser.value =
-        console.log(srt_parser.value)
-    console.log(props.subs)
+    // srt_parser.value =
+    //     console.log(srt_parser.value)
+    console.log("props.subs = " + props.subs)
 
     const options = {
         autoplay: true,
@@ -90,15 +110,19 @@ onMounted(() => {
 
     if (props.buttons.add) {
         const add_button = player.addChild('OverlayButton', { text: '+', style: { top: '1em', right: '1em', 'line-height': '1em' } });
-        add_button.on("click", async () => start_learning_clip("wanna_add_clip"))
+        add_button.on("click", async () => learn_emit("wanna_add_clip"))
     }
     if (props.buttons.remember) {
-        const remember_button = player.addChild('OverlayButton', { text: '✓', style: { top: '1em', right: '5em', 'line-height': '1em', background: 'rgba(420, 40, 40, 0.2)', background_hover: 'rgba(240, 40, 40, 0.4)', border: '1px solid rgba(240, 40, 40, 0.8)' } });
-        remember_button.on("click", async () => start_learning_clip("i_remembered_clip"))
+        const remember_button = player.addChild('OverlayButton', { text: '✓', style: { top: '1em', right: '5em', 'line-height': '1em', background: 'rgba(40, 240, 40, 0.2)', background_hover: 'rgba(40, 240, 40, 0.4)', border: '1px solid rgba(40, 240, 40, 0.8)' } });
+        remember_button.on("click", async () => learn_emit("i_remembered_clip"))
     }
     if (props.buttons.forget) {
-        const forget_button = player.addChild('OverlayButton', { text: 'X', style: { top: '1em', right: '3em', 'line-height': '1em', background: 'rgba(40, 240, 40, 0.2)', background_hover: 'rgba(40, 240, 40, 0.4)', border: '1px solid rgba(40, 240, 40, 0.8)' } });
-        forget_button.on("click", async () => start_learning_clip("i_forgot_clip"))
+        const forget_button = player.addChild('OverlayButton', { text: 'X', style: { top: '1em', right: '3em', 'line-height': '1em', background: 'rgba(240, 40, 40, 0.2)', background_hover: 'rgba(240, 40, 40, 0.4)', border: '1px solid rgba(240, 40, 40, 0.8)' } });
+        forget_button.on("click", async () => learn_emit("i_forgot_clip"))
+    }
+    if (props.buttons.debug) {
+        const forget_button = player.addChild('OverlayButton', { text: '?', style: { top: '1em', right: '7em', 'line-height': '1em', background: 'rgba(240, 240, 40, 0.2)', background_hover: 'rgba(240, 40, 40, 0.4)', border: '1px solid rgba(240, 40, 40, 0.8)' } });
+        forget_button.on("click", async () => { console.log(props.subs) })
     }
 
     player.on('timeupdate', (e) => {

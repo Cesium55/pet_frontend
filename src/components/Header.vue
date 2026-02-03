@@ -2,7 +2,7 @@
   <div class="header-component" :key="user_id">
     <div class="header-cont">
         <div class="header-left">
-            <div class="main-title">GEMBO</div>
+            <div class="main-title">GEMBOS</div>
         </div>
         <div class="header-right">
             <div class="navigation">
